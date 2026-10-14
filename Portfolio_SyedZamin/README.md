@@ -1,4 +1,4 @@
-# Syed Zamin Portfolio
+# SyedZamin Portfolio
 
 <<<<<<< HEAD
 A business-first data science portfolio built with Next.js, React, Tailwind CSS,
