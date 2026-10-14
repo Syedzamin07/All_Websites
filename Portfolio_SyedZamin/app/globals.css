@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-ink/10 dark:border-chalk/10;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper text-ink dark:bg-void dark:text-chalk;
+  }
+
+  /* Visible, on-brand focus states — never outline: none without this */
+  :focus-visible {
+    outline: 2px solid #4c6fff;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background-color: rgba(76, 111, 255, 0.25);
+  }
+
+  /* Referenced by page components as var(--text-color); mirrors the
+     ink/chalk tokens so it stays in sync with the rest of the theme. */
+  :root {
+    --text-color: #0a0a0b;
+  }
+
+  .dark {
+    --text-color: #f5f5f4;
+  }
+
+  /* Respect reduced-motion at the OS level, globally */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Used on headings across About/Skills/Projects/Dashboards/Experience.
+     Restrained two-stop gradient using existing ink/chalk + accent tokens
+     only — no new colors introduced. */
+  .apple-gradient {
+    background-image: linear-gradient(90deg, #0a0a0b, #4c6fff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .dark .apple-gradient {
+    background-image: linear-gradient(90deg, #f5f5f4, #4c6fff);
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Card pattern used on About and referenced by Skills/Dashboards.
+     Matches the existing surface/border/shadow tokens exactly. */
+  .bento-card {
+    border-radius: 14px;
+    border: 1px solid rgba(10, 10, 11, 0.1);
+    background-color: #ffffff;
+    padding: 2rem;
+    transition:
+      transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 200ms,
+      box-shadow 200ms;
+  }
+
+  .bento-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(10, 10, 11, 0.2);
+    box-shadow: 0 12px 32px -16px rgba(10, 10, 11, 0.12);
+  }
+
+  .dark .bento-card {
+    border-color: rgba(245, 245, 244, 0.1);
+    background-color: #131315;
+  }
+
+  .dark .bento-card:hover {
+    border-color: rgba(245, 245, 244, 0.2);
+    box-shadow: 0 12px 32px -16px rgba(0, 0, 0, 0.5);
+  }
+}
